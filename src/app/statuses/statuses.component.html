@@ -10,7 +10,7 @@
         <span *ngIf="!statusText">{{this.status.maxLength}}</span>
       </span>
       <!-- On click of this button, post status -->
-      <button class="btn btn-primary btn-md" [disabled]="canPostStatus != true" (click)="postStatus()">Post</button>
+      <button class="btn btn-primary btn-md" [disabled]="canPostStatus != false" (click)="postStatus()">Post</button>
     </div>
   </form>
 </div>
