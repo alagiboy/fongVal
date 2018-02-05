@@ -1,43 +1,17 @@
 aside.main {
-    .photo {
-        height: 95px;
-        width: 100%;
-        background-color: #d9d9d9;
-    }
-    .ad-one {
-        background-image: url(../assets/imgs/ad1.png);
+    .photo img{
         height: 100%;
         width: 100%;
         max-width: 320px;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+        background-color: #d9d9d9;
     }
-    .ad-two {
-      background-image: url(../assets/imgs/ad2.png);
-      height: 100%;
-      width: 100%;
-      max-width: 320px;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
+    h2
+    {
+      color: #c01948;
+      font-size: 1.4rem;
+      letter-spacing: .2rem;
+      font-family: 'Helvetica', sans-serif;
+      text-align: center;
     }
-    .assets {
-        padding: 10px 0;
-        .assets-count {
-            padding: 0 16px;
-            display: block;
-            font-size: 13px;
-            color: #657786;
-        }
-        .assets-title {
-            font-weight: 600;
-            padding: 0 16px;
-            color: #657786;
-            display: block;
-        } 
-        .no-left-pad {
-            padding-left: 0;
-        }
-    }
+
 }
