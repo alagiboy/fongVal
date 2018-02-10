@@ -54,6 +54,9 @@ export class StatusesComponent implements OnInit {
   // ---------------------------------------------------------
 
   react(reaction: string, status) {
+    if (this.status.alreadyReacted(status.$key))
+     return
     this.status.react(reaction, status)
+      this.status.setCookie({statusId: status.$key, isLiked: true})
   }
 }
