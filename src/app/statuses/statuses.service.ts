@@ -2,15 +2,31 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 
+import {CookieService} from 'angular2-cookie/core';
+
 //import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import "rxjs/add/operator/map";
+import { fail } from 'assert';
+
+
+  // ----------------------------------------------------------------------
+  // Interface for cookie object
+  // ----------------------------------------------------------------------
+  interface CookieData {
+    statusId: string;
+    isLiked: boolean;
+  }
+
 
 @Injectable()
 export class StatusesService {
 
   // Flag to see if status update is in progress
   private inProgress: boolean = false
+
+  // Set default flag for cookie like reaction
+  private isLiked: boolean = false
 
   // Possible available reactions
   private reactions: string[] = ['like', 'love', 'dislike']
@@ -25,8 +41,8 @@ export class StatusesService {
   // Flag that determines if the status text is valid or nah
   public statusTextValid: boolean = false
 
-  // Class constructor, injects the angular fire database as this.af
-  constructor(private af: AngularFireDatabase) {
+  // Class constructor, injects the angular fire database as this.af and cookie services as _cookieService
+  constructor(private af: AngularFireDatabase, private _cookieService: CookieService) {
     this.statuses = this.af.list('/statuses');
   }
 
@@ -80,4 +96,21 @@ export class StatusesService {
   updating() : boolean {
     return this.inProgress
   }
+
+  // ----------------------------------------------------------------------
+  // Method to set cookie
+  // ----------------------------------------------------------------------
+  setCookie(cookie: CookieData): boolean{
+    let now = new Date()
+    return this._cookieService.putObject('_statuses__'+cookie.statusId, cookie, {expires: new Date( now.getFullYear(), now.getMonth()+1, now.getDate())}) ? true : false
+  }
+
+  // ----------------------------------------------------------------------
+  // Method to restrict multiple likes
+  // ----------------------------------------------------------------------
+  alreadyReacted(statusID: string) : boolean {
+    let ck  = this._cookieService.getObject('_statuses__'+statusID)
+    return this.isLiked = (typeof ck !== 'undefined' && ck.hasOwnProperty('isLiked') == true) ? true : false
+  }
+
 }
