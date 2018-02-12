@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+//import { CookieService } from 'angular2-cookie/services/cookies.service';
+//import { BaseCookieOptions, CookieService, CookieOptions } from 'angular2-cookie';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -38,7 +39,9 @@ export const firebaseConfig = {
     AngularFireDatabaseModule
   ],
   providers: [
-    StatusesService, CookieService
+    StatusesService //, CookieService
+    //{ provide: CookieOptions, useClass: BaseCookieOptions }
+
   ],
   bootstrap: [AppComponent]
 })

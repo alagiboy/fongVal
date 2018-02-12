@@ -2,22 +2,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 
-import {CookieService} from 'angular2-cookie/core';
+import { CookieService } from 'angular2-cookie/core';
 
 //import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import "rxjs/add/operator/map";
 import { fail } from 'assert';
 
-
   // ----------------------------------------------------------------------
   // Interface for cookie object
   // ----------------------------------------------------------------------
-  interface CookieData {
+  /*interface CookieData {
     statusId: string;
     isLiked: boolean;
   }
-
+*/
 
 @Injectable()
 export class StatusesService {
@@ -42,7 +41,7 @@ export class StatusesService {
   public statusTextValid: boolean = false
 
   // Class constructor, injects the angular fire database as this.af and cookie services as _cookieService
-  constructor(private af: AngularFireDatabase, private _cookieService: CookieService) {
+  constructor(private af: AngularFireDatabase/*, private _cookieService: CookieService*/) {
     this.statuses = this.af.list('/statuses');
   }
 
@@ -100,7 +99,7 @@ export class StatusesService {
   // ----------------------------------------------------------------------
   // Method to set cookie
   // ----------------------------------------------------------------------
-  setCookie(cookie: CookieData): boolean{
+/*  setCookie(cookie: CookieData): boolean{
     let now = new Date()
     return this._cookieService.putObject('_statuses__'+cookie.statusId, cookie, {expires: new Date( now.getFullYear(), now.getMonth()+1, now.getDate())}) ? true : false
   }
@@ -112,5 +111,5 @@ export class StatusesService {
     let ck  = this._cookieService.getObject('_statuses__'+statusID)
     return this.isLiked = (typeof ck !== 'undefined' && ck.hasOwnProperty('isLiked') == true) ? true : false
   }
-
+*/
 }
